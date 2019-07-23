@@ -121,7 +121,7 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
             if (overrideColor) segmentColor = "#97BBCD";
 
             datastructure.datasets[keySeries] = {
-                label: jQuery.i18n.prop(chartConfig.title),
+                label: /* jQuery.i18n.prop( */ chartConfig.title /*)*/,
                 backgroundColor: transparentColors(segmentColor,50),
                 data: []
             };
@@ -141,7 +141,7 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
                 if (result.label == null) result.label = "";
                 if (!(chartConfig.hideEmptyValues && result.label == "")/* && result["count"] > 0*/) {
 
-                    var i18n = jQuery.i18n.prop(result.label)
+                    var i18n = /* jQuery.i18n.prop( */ result.label /*)*/;
                     if(i18n.includes("[")){
                         i18n = result.label
                     }
@@ -258,7 +258,7 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
                 if (!chartConfig.sliderFq) {
 
                     //compile results from WS call
-                    datastructure = createDatastructure(data, chartConfig, facet)
+                    datastructure = createDatastructure(data, chartConfig, facet);
 
                     chartConfig.maxValue = datastructure.maxValue;
                     chartConfig.datastructure = datastructure;
@@ -294,7 +294,7 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
     var getChartLabelMaxLen = function(chart, chartType) {
         //allow up to 45% for legend; more than 50% means it gets trimmed
         if (chartType == 'horizontalBar') {
-            var maxPx = chart.chart.width * 0.45; 
+            var maxPx = chart.chart.width * 0.45;
         } else if (chartType == 'bar' || chartType == 'line') {
             var maxPx = chart.chart.height * 0.45;
         }
@@ -360,12 +360,12 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
         }
         return 0;
     }
-    
+
     var drawChart = function (datastructure, labelToFq, $canvas, chartConfig, divId) {
         var chart;
         // remain compatible with older config
         var chartType = (chartConfig.chartType == 'horizontal-bar') ? 'horizontalBar' : chartConfig.chartType;
-        
+
         if (chartConfig.chart) {
             adjustChartLabelsAndSize(datastructure, chartType, chartConfig, chartConfig.chart, divId);
             //update current chart data
@@ -375,7 +375,6 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
         } else {
             var ctx = $canvas.get(0).getContext("2d");
 
-            
             var scales = getScales(chartType, chartConfig.maxValue, chartConfig.logarithmic);
 
             chart = new Chart(ctx, {
@@ -393,7 +392,7 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
             if (chartType == 'pie' || chartType == 'doughnut' || chartConfig.seriesEnabled) {
                 $('#' + divId).find('.chart-legend').get(0).innerHTML = chart.generateLegend();
             }
-            
+
             adjustChartLabelsAndSize(datastructure, chartType, chartConfig, chart, divId);
 
             $canvas.click(
@@ -515,6 +514,7 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
         }
 
         //console.log(queryUrl);
+        //console.log(chartConfig);
 
         if (divId) $('#' + divId).find('.chart-loading').show();
 
@@ -657,12 +657,12 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
             $('#' + chartsDivId).append($topDiv);
         }
 
-        $topDiv.find('.bootToggle').bootstrapToggle({
+        /* $topDiv.find('.bootToggle').bootstrapToggle({
             on: 'hide',
             off: 'show',
             size: 'mini',
             onstyle: 'default'
-        });
+        }); */
 
         return divId;
     };
@@ -750,8 +750,8 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
 
     var createTextInput = function(label, clas, value, hint) {
         return $('<div/>').addClass('chart-add-group').
-            append($('<label>' + jQuery.i18n.prop(label) + '</label>').addClass('chart-add-label').append(createHintIcon(hint))).
-            append($('<input/>').addClass('chart-add-' + clas).val(value));
+        append($('<label>' + /* jQuery.i18n.prop( */ label /* ) */ + '</label>').addClass('chart-add-label').append(createHintIcon(hint))).
+        append($('<input/>').addClass('chart-add-' + clas).val(value));
     };
 
     var createSelectInput = function(label, clas, values, defaultValue, hint) {
@@ -762,14 +762,14 @@ ALA.BiocacheCharts = function (chartsDivId, chartOptions) {
         select.val(defaultValue);
 
         return $('<div/>').addClass('chart-add-group').
-            append($('<label>' + jQuery.i18n.prop(label) + '</label>').addClass('chart-add-label').append(createHintIcon(hint))).
-            append(select);
+        append($('<label>' + /* jQuery.i18n.prop( */ label /* ) */ + '</label>').addClass('chart-add-label').append(createHintIcon(hint))).
+        append(select);
     };
 
     var createCheckboxInput = function (label, clas, value, hint) {
         return $('<div/>').addClass('chart-add-group').
-            append($('<label>' + jQuery.i18n.prop(label) + '</label>').addClass('chart-add-label').append(createHintIcon(hint))).
-            append($('<input/>').addClass('chart-add-' + clas).attr('type', 'checkbox').prop('checked', value));
+        append($('<label>' + /* jQuery.i18n.prop( */ label /* ) */ + '</label>').addClass('chart-add-label').append(createHintIcon(hint))).
+        append($('<input/>').addClass('chart-add-' + clas).attr('type', 'checkbox').prop('checked', value));
     };
 
     var createHintIcon = function(hint) {
