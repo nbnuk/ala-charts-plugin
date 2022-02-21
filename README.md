@@ -1,4 +1,4 @@
-###    [![Build Status](https://travis-ci.org/AtlasOfLivingAustralia/ala-charts-plugin.svg?branch=master)](https://travis-ci.org/AtlasOfLivingAustralia/ala-charts-plugin)
+###    [![Build Status](https://travis-ci.com/nbnuk/ala-charts-plugin.svg?branch=master)](https://travis-ci.com/nbnuk/ala-charts-plugin)
 
 The grails2 branch contains the 1.3.x series of the plugin compatible with Grails 2.x
 
